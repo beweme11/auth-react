@@ -1,24 +1,28 @@
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import BrowserRouter, Route, and Switch
 import logo from './logo.svg';
 import './App.css';
-
+import AzureAuth from './Authhandler';
+import SignIn from './Signin'; // Import the SignIn component
+import GetAllUsers from './Getusers';
+import TokenExpiryHandler from './Tokenexpiryhandler';
+import EditUsers from './Editusers';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router> {/* Wrap your app with BrowserRouter */}
+      <div className="App">
+        <header className="App-header">
+        <TokenExpiryHandler />
+          
+          <Routes> {/* Wrap your routes with Switch */}
+            <Route exact path="/" element={<AzureAuth/>} /> {/* Define route for AzureAuth */}
+            <Route path="/signin" element={<SignIn/>} /> {/* Define route for SignIn */}
+            <Route path = "/getusers" element = {<GetAllUsers/>}/>
+            <Route path = "/editusers" element = {<EditUsers/>}/>
+          </Routes>
+        </header>
+      </div>
+    </Router>
   );
 }
 
